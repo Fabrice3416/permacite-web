@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -7,11 +8,25 @@ import { Link2, Check, X } from 'lucide-react'
 
 const CHECKOUT_URL = 'https://formationdevia.lemonsqueezy.com/checkout/buy/1703519'
 
-const FREE_FEATURES = ['10 archives / month', 'APA & MLA citations', 'Wayback Machine archiving', 'Zotero sync', 'EN / FR / ES']
-const FREE_MISSING  = ['Unlimited archives', 'Priority support']
-const PRO_FEATURES  = ['Unlimited archives', 'APA & MLA citations', 'Wayback Machine archiving', 'Zotero sync', 'EN / FR / ES', 'Priority support']
-
 export default function PricingPage() {
+  const t = useTranslations('pricing')
+  const n = useTranslations('nav')
+
+  const freeFeatures = [
+    t('feat_10'), t('feat_citations'), t('feat_wayback'), t('feat_zotero'), t('feat_languages')
+  ]
+  const freeMissing = [t('feat_unlimited'), t('feat_support')]
+  const proFeatures = [
+    t('feat_unlimited'), t('feat_citations'), t('feat_wayback'), t('feat_zotero'), t('feat_languages'), t('feat_support')
+  ]
+
+  const faqs = [
+    { q: t('q1'), a: t('a1') },
+    { q: t('q2'), a: t('a2') },
+    { q: t('q3'), a: t('a3') },
+    { q: t('q4'), a: t('a4') },
+  ]
+
   return (
     <div className="min-h-screen bg-white font-sans">
 
@@ -25,7 +40,7 @@ export default function PricingPage() {
             Permacite
           </Link>
           <Link href="/login" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'border-gray-200 text-navy')}>
-            Sign in
+            {n('signin')}
           </Link>
         </div>
       </header>
@@ -33,12 +48,10 @@ export default function PricingPage() {
       {/* Header */}
       <section className="mx-auto max-w-3xl px-6 pb-16 pt-16 text-center">
         <Badge variant="outline" className="mb-6 border-yellow-300 bg-yellow-50 text-yellow-700">
-          Simple pricing
+          {t('badge')}
         </Badge>
-        <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-navy">
-          Start free. Scale when ready.
-        </h1>
-        <p className="text-lg text-gray-500">No hidden fees. Cancel anytime.</p>
+        <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-navy">{t('title')}</h1>
+        <p className="text-lg text-gray-500">{t('sub')}</p>
       </section>
 
       {/* Plans */}
@@ -48,28 +61,28 @@ export default function PricingPage() {
           {/* Free */}
           <Card className="border-gray-200 shadow-none">
             <CardHeader className="pb-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Free</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{t('free_label')}</p>
               <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-4xl font-black text-navy">$0</span>
-                <span className="text-gray-400">/month</span>
+                <span className="text-4xl font-black text-navy">{t('free_price')}</span>
+                <span className="text-gray-400">{t('per_month')}</span>
               </div>
-              <p className="mt-1 text-sm text-gray-500">For occasional researchers</p>
+              <p className="mt-1 text-sm text-gray-500">{t('free_sub')}</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="space-y-2.5">
-                {FREE_FEATURES.map((f) => (
+                {freeFeatures.map((f) => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
                     <Check className="h-4 w-4 shrink-0 text-green-500" />{f}
                   </li>
                 ))}
-                {FREE_MISSING.map((f) => (
+                {freeMissing.map((f) => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-gray-300">
                     <X className="h-4 w-4 shrink-0" />{f}
                   </li>
                 ))}
               </ul>
               <Link href="/login" className={cn(buttonVariants({ variant: 'outline' }), 'mt-4 w-full border-gray-200 text-navy')}>
-                Get started free
+                {t('free_cta')}
               </Link>
             </CardContent>
           </Card>
@@ -77,50 +90,40 @@ export default function PricingPage() {
           {/* Pro */}
           <Card className="relative border-navy bg-navy shadow-xl shadow-navy/20">
             <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-              <Badge className="bg-yellow-400 text-navy hover:bg-yellow-300">Most popular</Badge>
+              <Badge className="bg-yellow-400 text-navy hover:bg-yellow-300">{t('popular_badge')}</Badge>
             </div>
             <CardHeader className="pb-4">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">Pro</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-white/50">{t('pro_label')}</p>
               <div className="mt-2 flex items-baseline gap-1">
-                <span className="text-4xl font-black text-white">€9.99</span>
-                <span className="text-white/50">/month</span>
+                <span className="text-4xl font-black text-white">{t('pro_price')}</span>
+                <span className="text-white/50">{t('per_month')}</span>
               </div>
-              <p className="mt-1 text-sm text-white/60">For active researchers</p>
+              <p className="mt-1 text-sm text-white/60">{t('pro_sub')}</p>
             </CardHeader>
             <CardContent className="space-y-4">
               <ul className="space-y-2.5">
-                {PRO_FEATURES.map((f) => (
+                {proFeatures.map((f) => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-white/80">
                     <Check className="h-4 w-4 shrink-0 text-yellow-400" />{f}
                   </li>
                 ))}
               </ul>
-              <a
-                href={CHECKOUT_URL}
-                className={cn(buttonVariants(), 'mt-4 w-full bg-yellow-400 font-semibold text-navy hover:bg-yellow-300')}
-              >
-                Upgrade to Pro
+              <a href={CHECKOUT_URL} className={cn(buttonVariants(), 'mt-4 w-full bg-yellow-400 font-semibold text-navy hover:bg-yellow-300')}>
+                {t('pro_cta')}
               </a>
             </CardContent>
           </Card>
 
         </div>
-        <p className="mt-8 text-center text-sm text-gray-400">
-          Payments secured by Lemon Squeezy &middot; Cancel anytime
-        </p>
+        <p className="mt-8 text-center text-sm text-gray-400">{t('payment_note')}</p>
       </section>
 
       {/* FAQ */}
       <section className="border-t border-gray-100 bg-gray-50 py-16">
         <div className="mx-auto max-w-2xl px-6">
-          <h2 className="mb-10 text-center text-2xl font-bold text-navy">Frequently asked</h2>
+          <h2 className="mb-10 text-center text-2xl font-bold text-navy">{t('faq_title')}</h2>
           <div className="space-y-6">
-            {[
-              { q: 'What counts as an archive?', a: 'Each time you click the Permacite icon on a page, that is one archive. The same URL archived twice counts twice.' },
-              { q: 'What happens when I reach the free limit?', a: 'Permacite shows an upgrade prompt. Your existing archives and citations remain accessible.' },
-              { q: 'Can I cancel my Pro subscription?', a: 'Yes, at any time from your Lemon Squeezy billing portal. Your account reverts to the Free plan.' },
-              { q: 'Which citation formats are supported?', a: 'APA 7th edition and MLA 9th edition are both generated automatically.' },
-            ].map(({ q, a }) => (
+            {faqs.map(({ q, a }) => (
               <div key={q} className="border-b border-gray-200 pb-6">
                 <h3 className="mb-2 font-semibold text-navy">{q}</h3>
                 <p className="text-sm leading-relaxed text-gray-500">{a}</p>

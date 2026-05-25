@@ -1,7 +1,8 @@
 'use client'
 
 import { Suspense, useState } from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { useSearchParams } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 import { Button } from '@/components/ui/button'
@@ -10,6 +11,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Link2, Mail, ArrowLeft } from 'lucide-react'
 
 function LoginForm() {
+  const t = useTranslations('login')
   const searchParams  = useSearchParams()
   const fromExtension = searchParams.get('source') === 'extension'
   const extId         = searchParams.get('ext_id') ?? ''
@@ -58,13 +60,13 @@ function LoginForm() {
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
           <Mail className="h-5 w-5 text-green-600" />
         </div>
-        <h2 className="mb-2 text-xl font-bold text-navy">Check your inbox</h2>
+        <h2 className="mb-2 text-xl font-bold text-navy">{t('success_title')}</h2>
         <p className="text-sm leading-relaxed text-gray-500">
-          We sent a magic link to <strong className="text-navy">{email}</strong>.
-          <br />
-          Click it to sign in{fromExtension ? ' and return to the extension' : ''}.
+          {fromExtension
+            ? t('success_body_extension', { email })
+            : t('success_body', { email })}
         </p>
-        <p className="mt-4 text-xs text-gray-400">No email? Check your spam folder.</p>
+        <p className="mt-4 text-xs text-gray-400">{t('success_spam')}</p>
       </CardContent>
     )
   }
@@ -72,23 +74,21 @@ function LoginForm() {
   return (
     <>
       <CardHeader className="space-y-1 pb-2">
-        <h1 className="text-xl font-bold text-navy">Sign in to Permacite</h1>
+        <h1 className="text-xl font-bold text-navy">{t('title')}</h1>
         <p className="text-sm text-gray-500">
-          {fromExtension
-            ? 'Sign in to start archiving your research sources.'
-            : 'Enter your email to receive a magic link.'}
+          {fromExtension ? t('subtitle_extension') : t('subtitle_web')}
         </p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
             <label htmlFor="email" className="text-sm font-medium text-navy">
-              Email address
+              {t('email_label')}
             </label>
             <Input
               id="email"
               type="email"
-              placeholder="you@example.com"
+              placeholder={t('email_placeholder')}
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -103,27 +103,26 @@ function LoginForm() {
             disabled={loading}
             className="w-full bg-navy text-white hover:bg-navy-light disabled:opacity-60"
           >
-            {loading ? 'Sending…' : 'Send magic link'}
+            {loading ? t('submitting') : t('submit')}
           </Button>
         </form>
-        <p className="mt-5 text-center text-xs text-gray-400">
-          No password needed — we email you a one-time secure link.
-        </p>
+        <p className="mt-5 text-center text-xs text-gray-400">{t('hint')}</p>
       </CardContent>
     </>
   )
 }
 
 export default function LoginPage() {
+  const t = useTranslations('login')
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4 font-sans">
-
       <Link
         href="/"
         className="mb-8 flex items-center gap-1.5 text-sm text-gray-400 transition-colors hover:text-navy"
       >
         <ArrowLeft className="h-3.5 w-3.5" />
-        Back to Permacite
+        {t('back')}
       </Link>
 
       <div className="mb-6 flex items-center gap-2.5">
@@ -146,12 +145,7 @@ export default function LoginPage() {
         </Suspense>
       </Card>
 
-      <p className="mt-6 text-center text-xs text-gray-400">
-        By signing in you agree to our{' '}
-        <Link href="#" className="underline underline-offset-2 hover:text-navy">Terms</Link>
-        {' '}and{' '}
-        <Link href="#" className="underline underline-offset-2 hover:text-navy">Privacy Policy</Link>.
-      </p>
+      <p className="mt-6 text-center text-xs text-gray-400">{t('terms_notice')}</p>
     </div>
   )
 }
