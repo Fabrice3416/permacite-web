@@ -1,186 +1,135 @@
 import Link from 'next/link'
+import { Badge } from '@/components/ui/badge'
+import { buttonVariants } from '@/components/ui/button'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { cn } from '@/lib/utils'
+import { Link2, Check, X } from 'lucide-react'
 
 const CHECKOUT_URL = 'https://formationdevia.lemonsqueezy.com/checkout/buy/1703519'
 
+const FREE_FEATURES = ['10 archives / month', 'APA & MLA citations', 'Wayback Machine archiving', 'Zotero sync', 'EN / FR / ES']
+const FREE_MISSING  = ['Unlimited archives', 'Priority support']
+const PRO_FEATURES  = ['Unlimited archives', 'APA & MLA citations', 'Wayback Machine archiving', 'Zotero sync', 'EN / FR / ES', 'Priority support']
+
 export default function PricingPage() {
   return (
-    <main style={s.wrap}>
-      <div style={s.inner}>
-        <div style={s.logo}>
-          <span style={{ fontSize: 28 }}>📎</span>
-          <span style={s.logoText}>Permacite</span>
+    <div className="min-h-screen bg-white font-sans">
+
+      {/* Nav */}
+      <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <Link href="/" className="flex items-center gap-2.5 font-bold text-navy">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy">
+              <Link2 className="h-4 w-4 text-yellow-400" />
+            </div>
+            Permacite
+          </Link>
+          <Link href="/login" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'border-gray-200 text-navy')}>
+            Sign in
+          </Link>
         </div>
+      </header>
 
-        <h1 style={s.title}>Simple, honest pricing</h1>
-        <p style={s.sub}>Archive your research sources permanently. Never lose a citation.</p>
+      {/* Header */}
+      <section className="mx-auto max-w-3xl px-6 pb-16 pt-16 text-center">
+        <Badge variant="outline" className="mb-6 border-yellow-300 bg-yellow-50 text-yellow-700">
+          Simple pricing
+        </Badge>
+        <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-navy">
+          Start free. Scale when ready.
+        </h1>
+        <p className="text-lg text-gray-500">No hidden fees. Cancel anytime.</p>
+      </section>
 
-        <div style={s.grid}>
+      {/* Plans */}
+      <section className="mx-auto max-w-4xl px-6 pb-20">
+        <div className="grid gap-6 md:grid-cols-2 md:items-start">
+
           {/* Free */}
-          <div style={s.card}>
-            <div style={s.planName}>Free</div>
-            <div style={s.price}>$0<span style={s.per}>/month</span></div>
-            <ul style={s.list}>
-              <li style={s.item}>✓ 10 archived sources / month</li>
-              <li style={s.item}>✓ APA &amp; MLA citations</li>
-              <li style={s.item}>✓ Wayback Machine archiving</li>
-              <li style={s.item}>✓ Zotero sync</li>
-              <li style={{ ...s.item, color: '#94a3b8' }}>✗ Unlimited archives</li>
-            </ul>
-            <Link href="/login" style={{ ...s.btn, ...s.btnOutline }}>
-              Get started free
-            </Link>
-          </div>
+          <Card className="border-gray-200 shadow-none">
+            <CardHeader className="pb-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-400">Free</p>
+              <div className="mt-2 flex items-baseline gap-1">
+                <span className="text-4xl font-black text-navy">$0</span>
+                <span className="text-gray-400">/month</span>
+              </div>
+              <p className="mt-1 text-sm text-gray-500">For occasional researchers</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <ul className="space-y-2.5">
+                {FREE_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
+                    <Check className="h-4 w-4 shrink-0 text-green-500" />{f}
+                  </li>
+                ))}
+                {FREE_MISSING.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-gray-300">
+                    <X className="h-4 w-4 shrink-0" />{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/login" className={cn(buttonVariants({ variant: 'outline' }), 'mt-4 w-full border-gray-200 text-navy')}>
+                Get started free
+              </Link>
+            </CardContent>
+          </Card>
 
           {/* Pro */}
-          <div style={{ ...s.card, ...s.cardPro }}>
-            <div style={s.badge}>Most popular</div>
-            <div style={{ ...s.planName, color: '#fff' }}>Pro</div>
-            <div style={{ ...s.price, color: '#fff' }}>
-              €9.99<span style={{ ...s.per, color: '#94a3b8' }}>/month</span>
+          <Card className="relative border-navy bg-navy shadow-xl shadow-navy/20">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+              <Badge className="bg-yellow-400 text-navy hover:bg-yellow-300">Most popular</Badge>
             </div>
-            <ul style={s.list}>
-              <li style={{ ...s.item, color: '#e2e8f0' }}>✓ Unlimited archived sources</li>
-              <li style={{ ...s.item, color: '#e2e8f0' }}>✓ APA &amp; MLA citations</li>
-              <li style={{ ...s.item, color: '#e2e8f0' }}>✓ Wayback Machine archiving</li>
-              <li style={{ ...s.item, color: '#e2e8f0' }}>✓ Zotero sync</li>
-              <li style={{ ...s.item, color: '#eab308' }}>✓ Priority support</li>
-            </ul>
-            <a href={CHECKOUT_URL} style={{ ...s.btn, ...s.btnPro }}>
-              Upgrade to Pro
-            </a>
+            <CardHeader className="pb-4">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/50">Pro</p>
+              <div className="mt-2 flex items-baseline gap-1">
+                <span className="text-4xl font-black text-white">€9.99</span>
+                <span className="text-white/50">/month</span>
+              </div>
+              <p className="mt-1 text-sm text-white/60">For active researchers</p>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <ul className="space-y-2.5">
+                {PRO_FEATURES.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-white/80">
+                    <Check className="h-4 w-4 shrink-0 text-yellow-400" />{f}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={CHECKOUT_URL}
+                className={cn(buttonVariants(), 'mt-4 w-full bg-yellow-400 font-semibold text-navy hover:bg-yellow-300')}
+              >
+                Upgrade to Pro
+              </a>
+            </CardContent>
+          </Card>
+
+        </div>
+        <p className="mt-8 text-center text-sm text-gray-400">
+          Payments secured by Lemon Squeezy &middot; Cancel anytime
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-t border-gray-100 bg-gray-50 py-16">
+        <div className="mx-auto max-w-2xl px-6">
+          <h2 className="mb-10 text-center text-2xl font-bold text-navy">Frequently asked</h2>
+          <div className="space-y-6">
+            {[
+              { q: 'What counts as an archive?', a: 'Each time you click the Permacite icon on a page, that is one archive. The same URL archived twice counts twice.' },
+              { q: 'What happens when I reach the free limit?', a: 'Permacite shows an upgrade prompt. Your existing archives and citations remain accessible.' },
+              { q: 'Can I cancel my Pro subscription?', a: 'Yes, at any time from your Lemon Squeezy billing portal. Your account reverts to the Free plan.' },
+              { q: 'Which citation formats are supported?', a: 'APA 7th edition and MLA 9th edition are both generated automatically.' },
+            ].map(({ q, a }) => (
+              <div key={q} className="border-b border-gray-200 pb-6">
+                <h3 className="mb-2 font-semibold text-navy">{q}</h3>
+                <p className="text-sm leading-relaxed text-gray-500">{a}</p>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
 
-        <p style={s.note}>
-          Payments secured by Lemon Squeezy. Cancel anytime.
-        </p>
-      </div>
-    </main>
+    </div>
   )
-}
-
-const s: Record<string, React.CSSProperties> = {
-  wrap: {
-    minHeight: '100vh',
-    background: '#f8fafc',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    padding: '40px 16px'
-  },
-  inner: {
-    width: '100%',
-    maxWidth: 760,
-    textAlign: 'center'
-  },
-  logo: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 32
-  },
-  logoText: {
-    fontWeight: 700,
-    fontSize: 20,
-    color: '#1a1a2e'
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 800,
-    color: '#1a1a2e',
-    margin: '0 0 12px'
-  },
-  sub: {
-    fontSize: 16,
-    color: '#64748b',
-    margin: '0 0 48px'
-  },
-  grid: {
-    display: 'flex',
-    gap: 24,
-    justifyContent: 'center',
-    flexWrap: 'wrap' as const
-  },
-  card: {
-    background: '#fff',
-    borderRadius: 16,
-    padding: '32px 28px',
-    width: 300,
-    boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-    textAlign: 'left' as const,
-    position: 'relative' as const
-  },
-  cardPro: {
-    background: '#1a1a2e'
-  },
-  badge: {
-    position: 'absolute' as const,
-    top: -12,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    background: '#eab308',
-    color: '#1a1a2e',
-    fontSize: 11,
-    fontWeight: 700,
-    padding: '4px 12px',
-    borderRadius: 20,
-    whiteSpace: 'nowrap' as const
-  },
-  planName: {
-    fontSize: 13,
-    fontWeight: 700,
-    textTransform: 'uppercase' as const,
-    letterSpacing: 1,
-    color: '#64748b',
-    marginBottom: 8
-  },
-  price: {
-    fontSize: 36,
-    fontWeight: 800,
-    color: '#1a1a2e',
-    marginBottom: 24
-  },
-  per: {
-    fontSize: 16,
-    fontWeight: 400,
-    color: '#64748b'
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-    margin: '0 0 28px',
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: 10
-  },
-  item: {
-    fontSize: 14,
-    color: '#374151'
-  },
-  btn: {
-    display: 'block',
-    textAlign: 'center' as const,
-    padding: '12px 20px',
-    borderRadius: 8,
-    fontSize: 14,
-    fontWeight: 600,
-    textDecoration: 'none',
-    cursor: 'pointer'
-  },
-  btnOutline: {
-    border: '2px solid #1a1a2e',
-    color: '#1a1a2e',
-    background: 'transparent'
-  },
-  btnPro: {
-    background: '#eab308',
-    color: '#1a1a2e',
-    border: 'none'
-  },
-  note: {
-    marginTop: 32,
-    fontSize: 13,
-    color: '#94a3b8'
-  }
 }

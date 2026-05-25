@@ -1,8 +1,13 @@
 'use client'
 
 import { Suspense, useState } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Link2, Mail, ArrowLeft } from 'lucide-react'
 
 function LoginForm() {
   const searchParams  = useSearchParams()
@@ -49,151 +54,104 @@ function LoginForm() {
 
   if (sent) {
     return (
-      <main style={styles.wrap}>
-        <div style={styles.card}>
-          <div style={styles.icon}>📬</div>
-          <h1 style={styles.title}>Check your email</h1>
-          <p style={styles.sub}>
-            We sent a magic link to <strong>{email}</strong>.<br />
-            Click it to sign in{fromExtension ? ' and return to the extension' : ''}.
-          </p>
+      <CardContent className="py-8 text-center">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+          <Mail className="h-5 w-5 text-green-600" />
         </div>
-      </main>
+        <h2 className="mb-2 text-xl font-bold text-navy">Check your inbox</h2>
+        <p className="text-sm leading-relaxed text-gray-500">
+          We sent a magic link to <strong className="text-navy">{email}</strong>.
+          <br />
+          Click it to sign in{fromExtension ? ' and return to the extension' : ''}.
+        </p>
+        <p className="mt-4 text-xs text-gray-400">No email? Check your spam folder.</p>
+      </CardContent>
     )
   }
 
   return (
-    <main style={styles.wrap}>
-      <div style={styles.card}>
-        <div style={styles.logo}>
-          <span style={{ fontSize: 28 }}>📎</span>
-          <span style={styles.logoText}>Permacite</span>
-        </div>
-
-        <h1 style={styles.title}>Sign in</h1>
-        <p style={styles.sub}>
+    <>
+      <CardHeader className="space-y-1 pb-2">
+        <h1 className="text-xl font-bold text-navy">Sign in to Permacite</h1>
+        <p className="text-sm text-gray-500">
           {fromExtension
             ? 'Sign in to start archiving your research sources.'
-            : 'Welcome back.'}
+            : 'Enter your email to receive a magic link.'}
         </p>
-
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input
-            type="email"
-            placeholder="your@email.com"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-            style={styles.input}
-            autoFocus
-          />
-          {error && <p style={styles.error}>{error}</p>}
-          <button type="submit" disabled={loading} style={styles.btn}>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1.5">
+            <label htmlFor="email" className="text-sm font-medium text-navy">
+              Email address
+            </label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoFocus
+            />
+          </div>
+          {error && (
+            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>
+          )}
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-navy text-white hover:bg-navy-light disabled:opacity-60"
+          >
             {loading ? 'Sending…' : 'Send magic link'}
-          </button>
+          </Button>
         </form>
-
-        <p style={styles.hint}>No password needed — we email you a secure link.</p>
-      </div>
-    </main>
+        <p className="mt-5 text-center text-xs text-gray-400">
+          No password needed — we email you a one-time secure link.
+        </p>
+      </CardContent>
+    </>
   )
 }
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={
-      <main style={styles.wrap}>
-        <div style={styles.card}>
-          <div style={styles.logo}>
-            <span style={{ fontSize: 28 }}>📎</span>
-            <span style={styles.logoText}>Permacite</span>
-          </div>
-          <h1 style={styles.title}>Sign in</h1>
-        </div>
-      </main>
-    }>
-      <LoginForm />
-    </Suspense>
-  )
-}
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4 font-sans">
 
-const styles: Record<string, React.CSSProperties> = {
-  wrap: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#f8fafc',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-  },
-  card: {
-    background: '#fff',
-    borderRadius: 12,
-    padding: '40px 36px',
-    width: '100%',
-    maxWidth: 400,
-    boxShadow: '0 4px 24px rgba(0,0,0,0.08)'
-  },
-  logo: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 24
-  },
-  logoText: {
-    fontWeight: 700,
-    fontSize: 20,
-    color: '#1a1a2e'
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 700,
-    color: '#1a1a2e',
-    margin: '0 0 6px'
-  },
-  sub: {
-    fontSize: 14,
-    color: '#64748b',
-    margin: '0 0 24px',
-    lineHeight: 1.6
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12
-  },
-  input: {
-    padding: '11px 14px',
-    border: '1px solid #e2e8f0',
-    borderRadius: 8,
-    fontSize: 14,
-    outline: 'none',
-    color: '#1a1a2e'
-  },
-  btn: {
-    padding: '11px 16px',
-    background: '#1a1a2e',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 8,
-    fontSize: 14,
-    fontWeight: 600,
-    cursor: 'pointer'
-  },
-  error: {
-    color: '#dc2626',
-    fontSize: 13,
-    margin: 0
-  },
-  hint: {
-    fontSize: 12,
-    color: '#94a3b8',
-    marginTop: 16,
-    textAlign: 'center'
-  },
-  icon: {
-    fontSize: 40,
-    textAlign: 'center',
-    marginBottom: 16
-  }
+      <Link
+        href="/"
+        className="mb-8 flex items-center gap-1.5 text-sm text-gray-400 transition-colors hover:text-navy"
+      >
+        <ArrowLeft className="h-3.5 w-3.5" />
+        Back to Permacite
+      </Link>
+
+      <div className="mb-6 flex items-center gap-2.5">
+        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-navy">
+          <Link2 className="h-4 w-4 text-yellow-400" />
+        </div>
+        <span className="text-lg font-bold text-navy">Permacite</span>
+      </div>
+
+      <Card className="w-full max-w-sm border-gray-200 shadow-sm">
+        <Suspense fallback={
+          <CardContent className="space-y-4 py-6">
+            <div className="h-5 w-40 rounded bg-gray-100" />
+            <div className="h-4 w-56 rounded bg-gray-100" />
+            <div className="h-10 rounded bg-gray-100" />
+            <div className="h-10 rounded bg-gray-100" />
+          </CardContent>
+        }>
+          <LoginForm />
+        </Suspense>
+      </Card>
+
+      <p className="mt-6 text-center text-xs text-gray-400">
+        By signing in you agree to our{' '}
+        <Link href="#" className="underline underline-offset-2 hover:text-navy">Terms</Link>
+        {' '}and{' '}
+        <Link href="#" className="underline underline-offset-2 hover:text-navy">Privacy Policy</Link>.
+      </p>
+    </div>
+  )
 }
