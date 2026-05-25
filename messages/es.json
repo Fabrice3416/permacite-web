@@ -1,0 +1,16 @@
+{
+  "app_name": "Permacite",
+  "tagline": "Tus fuentes, permanentes para siempre.",
+  "login": {
+    "title": "Iniciar sesión",
+    "subtitle_extension": "Inicia sesión para empezar a archivar tus fuentes.",
+    "subtitle_web": "Bienvenido.",
+    "email_placeholder": "tu@email.com",
+    "submit": "Enviar enlace mágico",
+    "submitting": "Enviando…",
+    "hint": "Sin contraseña — te enviamos un enlace seguro por email.",
+    "success_title": "Revisa tu email",
+    "success_body": "Enviamos un enlace a {email}. Haz clic para iniciar sesión.",
+    "success_body_extension": "Enviamos un enlace a {email}. Haz clic para iniciar sesión y volver a la extensión."
+  }
+}

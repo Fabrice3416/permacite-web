@@ -1,0 +1,16 @@
+{
+  "app_name": "Permacite",
+  "tagline": "Your sources, permanent forever.",
+  "login": {
+    "title": "Sign in",
+    "subtitle_extension": "Sign in to start archiving your research sources.",
+    "subtitle_web": "Welcome back.",
+    "email_placeholder": "your@email.com",
+    "submit": "Send magic link",
+    "submitting": "Sending…",
+    "hint": "No password needed — we email you a secure link.",
+    "success_title": "Check your email",
+    "success_body": "We sent a magic link to {email}. Click it to sign in.",
+    "success_body_extension": "We sent a magic link to {email}. Click it to sign in and return to the extension."
+  }
+}

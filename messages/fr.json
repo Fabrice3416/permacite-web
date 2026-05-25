@@ -1,0 +1,16 @@
+{
+  "app_name": "Permacite",
+  "tagline": "Vos sources, permanentes pour toujours.",
+  "login": {
+    "title": "Se connecter",
+    "subtitle_extension": "Connectez-vous pour commencer à archiver vos sources.",
+    "subtitle_web": "Bienvenue.",
+    "email_placeholder": "votre@email.com",
+    "submit": "Envoyer le lien magique",
+    "submitting": "Envoi en cours…",
+    "hint": "Pas de mot de passe — nous vous envoyons un lien sécurisé.",
+    "success_title": "Vérifiez vos emails",
+    "success_body": "Nous avons envoyé un lien à {email}. Cliquez dessus pour vous connecter.",
+    "success_body_extension": "Nous avons envoyé un lien à {email}. Cliquez dessus pour vous connecter et revenir à l'extension."
+  }
+}
