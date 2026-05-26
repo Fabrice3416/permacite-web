@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Link2, Mail, ArrowLeft } from 'lucide-react'
+import LocaleSwitcher from '@/components/locale-switcher'
 
 function LoginForm() {
   const t = useTranslations('login')
@@ -117,13 +118,16 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4 font-sans">
-      <Link
-        href="/"
-        className="mb-8 flex items-center gap-1.5 text-sm text-gray-400 transition-colors hover:text-navy"
-      >
-        <ArrowLeft className="h-3.5 w-3.5" />
-        {t('back')}
-      </Link>
+      <div className="mb-6 flex w-full max-w-sm items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-center gap-1.5 text-sm text-gray-400 transition-colors hover:text-navy"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          {t('back')}
+        </Link>
+        <LocaleSwitcher />
+      </div>
 
       <div className="mb-6 flex items-center gap-2.5">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-navy">

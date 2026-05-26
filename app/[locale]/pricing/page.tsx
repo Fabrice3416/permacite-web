@@ -5,6 +5,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Link2, Check, X } from 'lucide-react'
+import LocaleSwitcher from '@/components/locale-switcher'
 
 const CHECKOUT_URL = 'https://formationdevia.lemonsqueezy.com/checkout/buy/1703519'
 
@@ -39,9 +40,12 @@ export default function PricingPage() {
             </div>
             Permacite
           </Link>
-          <Link href="/login" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'border-gray-200 text-navy')}>
-            {n('signin')}
-          </Link>
+          <div className="flex items-center gap-4">
+            <LocaleSwitcher />
+            <Link href="/login" className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'border-gray-200 text-navy')}>
+              {n('signin')}
+            </Link>
+          </div>
         </div>
       </header>
 

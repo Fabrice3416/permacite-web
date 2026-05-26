@@ -5,6 +5,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { Archive, FileText, Link2, Globe, ArrowRight, Check } from 'lucide-react'
+import LocaleSwitcher from '@/components/locale-switcher'
 
 const EXTENSION_URL = '#' // TODO: replace with Chrome Web Store URL
 
@@ -37,7 +38,8 @@ export default function HomePage() {
             </div>
             Permacite
           </Link>
-          <nav className="flex items-center gap-6">
+          <nav className="flex items-center gap-4">
+            <LocaleSwitcher />
             <Link href="/pricing" className="text-sm text-gray-500 transition-colors hover:text-navy">
               {n('pricing')}
             </Link>
