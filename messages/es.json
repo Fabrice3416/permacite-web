@@ -1,4 +1,14 @@
 {
+  "meta": {
+    "home_title": "Permacite — Archiva tus fuentes. Cítalas para siempre.",
+    "home_desc": "Un clic guarda cualquier página en la Wayback Machine y genera una cita APA o MLA lista para pegar. Gratis, para siempre.",
+    "pricing_title": "Precios — Gratis, para siempre",
+    "pricing_desc": "Permacite es completamente gratuito. Archivos ilimitados, citas APA y MLA, archivado Wayback Machine y sincronización Zotero.",
+    "login_title": "Iniciar sesión",
+    "login_desc": "Inicia sesión en Permacite con un enlace mágico — sin contraseña.",
+    "install_title": "Instalar la extensión de Chrome",
+    "install_desc": "Descarga e instala la extensión de Chrome Permacite en 6 pasos simples. Gratis, sin Chrome Web Store."
+  },
   "nav": { "pricing": "Precios", "signin": "Iniciar sesión" },
   "home": {
     "badge": "Extensión Chrome — Gratis",

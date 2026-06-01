@@ -1,5 +1,14 @@
+import type { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { buildMetadata } from '@/lib/page-metadata'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  return buildMetadata(locale, 'home_title', 'home_desc')
+}
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -8,6 +17,17 @@ import { Archive, FileText, Link2, Globe, ArrowRight, Check } from 'lucide-react
 import LocaleSwitcher from '@/components/locale-switcher'
 
 const EXTENSION_URL = '/install'
+
+const appJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Permacite',
+  applicationCategory: 'BrowserApplication',
+  operatingSystem: 'Chrome',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description: 'Archive your research sources and generate APA/MLA citations in one click.',
+  url: 'https://permacite-web-mpqx.vercel.app',
+}
 
 export default function HomePage() {
   const t = useTranslations('home')
@@ -28,6 +48,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(appJsonLd) }}
+      />
 
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-sm">

@@ -1,5 +1,14 @@
+import type { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+import { buildMetadata } from '@/lib/page-metadata'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  return buildMetadata(locale, 'pricing_title', 'pricing_desc', '/pricing')
+}
 import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
