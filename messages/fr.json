@@ -63,11 +63,25 @@
     "view_archive": "Voir la capture"
   },
   "install": {
-    "badge": "Bientôt disponible",
-    "title": "Extension Chrome",
-    "sub": "L'extension Permacite sera disponible sur le Chrome Web Store très prochainement. Inscrivez-vous maintenant pour être parmi les premiers informés.",
-    "cta": "Se connecter / Créer un compte",
-    "cta_note": "Sans carte bancaire · Toujours gratuit"
+    "title": "Installer Permacite",
+    "sub": "Suivez ces 6 étapes pour ajouter Permacite à Chrome. Moins de 2 minutes.",
+    "download_btn": "Télécharger l'extension (.zip)",
+    "download_note": "Gratuit · Aucun compte requis pour télécharger",
+    "steps_title": "Comment installer",
+    "step1_title": "Téléchargez le ZIP",
+    "step1_desc": "Cliquez sur le bouton ci-dessus pour télécharger le fichier permacite-extension.zip.",
+    "step2_title": "Dézippez le fichier",
+    "step2_desc": "Faites un clic droit sur le ZIP et choisissez \"Extraire tout\" (Windows) ou double-cliquez dessus (Mac). Vous obtiendrez un dossier nommé permacite-extension.",
+    "step3_title": "Ouvrez les extensions Chrome",
+    "step3_desc": "Dans Chrome, tapez cette adresse dans la barre d'adresse et appuyez sur Entrée :",
+    "step4_title": "Activez le mode développeur",
+    "step4_desc": "En haut à droite de la page des extensions, activez le bouton \"Mode développeur\".",
+    "step5_title": "Chargez l'extension",
+    "step5_desc": "Cliquez sur \"Charger l'extension non empaquetée\" (en haut à gauche), puis sélectionnez le dossier permacite-extension extrait à l'étape 2.",
+    "step6_title": "C'est fait !",
+    "step6_desc": "L'icône Permacite apparaît dans votre barre d'outils Chrome. Cliquez dessus et connectez-vous pour commencer à archiver.",
+    "after_title": "Extension installée ? Créez votre compte gratuit.",
+    "after_cta": "Se connecter / Créer un compte"
   },
   "login": {
     "back": "Retour à Permacite",
