@@ -20,6 +20,21 @@ export async function createSupabaseServer() {
   )
 }
 
+// Read-only client for server components (can't set cookies there)
+export async function createSupabaseReadonly() {
+  const cookieStore = await cookies()
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll: () => cookieStore.getAll(),
+        setAll: () => {}
+      }
+    }
+  )
+}
+
 // Validate a Bearer token from the extension and return the user
 export async function validateBearerToken(authHeader: string | null) {
   if (!authHeader?.startsWith('Bearer ')) return null

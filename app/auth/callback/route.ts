@@ -49,5 +49,5 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect(`${origin}/auth/extension-success`)
   }
 
-  return NextResponse.redirect(`${origin}/`)
+  return NextResponse.redirect(`${origin}/dashboard`)
 }

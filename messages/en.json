@@ -54,6 +54,21 @@
     "q4": "Which citation formats are supported?",
     "a4": "APA 7th edition and MLA 9th edition are both generated automatically."
   },
+  "dashboard": {
+    "this_month": "archives this month",
+    "recent_title": "Recent archives",
+    "empty": "No archives yet. Install the extension to get started.",
+    "sign_out": "Sign out",
+    "install_cta": "Install extension",
+    "view_archive": "View snapshot"
+  },
+  "install": {
+    "badge": "Coming soon",
+    "title": "Chrome extension",
+    "sub": "The Permacite extension will be available on the Chrome Web Store soon. Sign up now to be the first to know.",
+    "cta": "Sign in / Create account",
+    "cta_note": "No credit card required · Always free"
+  },
   "login": {
     "back": "Back to Permacite",
     "title": "Sign in to Permacite",

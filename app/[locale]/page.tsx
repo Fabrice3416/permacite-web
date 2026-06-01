@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { Archive, FileText, Link2, Globe, ArrowRight, Check } from 'lucide-react'
 import LocaleSwitcher from '@/components/locale-switcher'
 
-const EXTENSION_URL = '#' // TODO: replace with Chrome Web Store URL
+const EXTENSION_URL = '/install'
 
 export default function HomePage() {
   const t = useTranslations('home')

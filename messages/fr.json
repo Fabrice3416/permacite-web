@@ -54,6 +54,21 @@
     "q4": "Quels formats de citation sont pris en charge ?",
     "a4": "APA 7e édition et MLA 9e édition sont tous deux générés automatiquement."
   },
+  "dashboard": {
+    "this_month": "archives ce mois-ci",
+    "recent_title": "Archives récentes",
+    "empty": "Aucune archive pour l'instant. Installez l'extension pour commencer.",
+    "sign_out": "Se déconnecter",
+    "install_cta": "Installer l'extension",
+    "view_archive": "Voir la capture"
+  },
+  "install": {
+    "badge": "Bientôt disponible",
+    "title": "Extension Chrome",
+    "sub": "L'extension Permacite sera disponible sur le Chrome Web Store très prochainement. Inscrivez-vous maintenant pour être parmi les premiers informés.",
+    "cta": "Se connecter / Créer un compte",
+    "cta_note": "Sans carte bancaire · Toujours gratuit"
+  },
   "login": {
     "back": "Retour à Permacite",
     "title": "Connectez-vous à Permacite",

@@ -54,6 +54,21 @@
     "q4": "¿Qué formatos de cita están disponibles?",
     "a4": "APA 7.ª edición y MLA 9.ª edición se generan automáticamente."
   },
+  "dashboard": {
+    "this_month": "archivos este mes",
+    "recent_title": "Archivos recientes",
+    "empty": "Sin archivos aún. Instala la extensión para empezar.",
+    "sign_out": "Cerrar sesión",
+    "install_cta": "Instalar extensión",
+    "view_archive": "Ver captura"
+  },
+  "install": {
+    "badge": "Próximamente",
+    "title": "Extensión de Chrome",
+    "sub": "La extensión de Permacite estará disponible en la Chrome Web Store muy pronto. Regístrate ahora para ser de los primeros en saberlo.",
+    "cta": "Iniciar sesión / Crear cuenta",
+    "cta_note": "Sin tarjeta de crédito · Siempre gratis"
+  },
   "login": {
     "back": "Volver a Permacite",
     "title": "Iniciar sesión en Permacite",
