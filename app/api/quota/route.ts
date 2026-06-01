@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { validateBearerToken, createSupabaseServer } from '@/lib/supabase-server'
 
-const FREE_TIER_LIMIT = 10
-
 function corsHeaders(req: NextRequest) {
   const origin = req.headers.get('origin') ?? '*'
   return {
@@ -29,24 +27,15 @@ export async function GET(req: NextRequest) {
   startOfMonth.setDate(1)
   startOfMonth.setHours(0, 0, 0, 0)
 
-  const [{ count }, { data: profile }] = await Promise.all([
-    supabase
-      .from('citations')
-      .select('*', { count: 'exact', head: true })
-      .eq('user_id', user.id)
-      .gte('created_at', startOfMonth.toISOString()),
-    supabase
-      .from('users')
-      .select('tier')
-      .eq('id', user.id)
-      .single()
-  ])
-
-  const isPro = profile?.tier === 'pro'
+  const { count } = await supabase
+    .from('citations')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', user.id)
+    .gte('created_at', startOfMonth.toISOString())
 
   return NextResponse.json({
     used: count ?? 0,
-    max:  isPro ? null : FREE_TIER_LIMIT,
-    tier: profile?.tier ?? 'free'
+    max:  null,
+    tier: 'free'
   }, { headers: cors })
 }

@@ -4,8 +4,6 @@ import { validateBearerToken, createSupabaseServer } from '@/lib/supabase-server
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-const FREE_TIER_LIMIT = 10
-
 // CORS — echo back the caller's origin so chrome-extension:// IDs match exactly
 function corsHeaders(req: NextRequest) {
   const origin = req.headers.get('origin') ?? '*'
@@ -40,34 +38,7 @@ export async function POST(req: NextRequest) {
 
     const supabase = await createSupabaseServer()
 
-    // ── 3. Quota check ─────────────────────────────────────────────────────
-    const startOfMonth = new Date()
-    startOfMonth.setDate(1)
-    startOfMonth.setHours(0, 0, 0, 0)
-
-    const { count } = await supabase
-      .from('citations')
-      .select('*', { count: 'exact', head: true })
-      .eq('user_id', user.id)
-      .gte('created_at', startOfMonth.toISOString())
-
-    const { data: profile } = await supabase
-      .from('users')
-      .select('tier')
-      .eq('id', user.id)
-      .single()
-
-    const isPro = profile?.tier === 'pro'
-    const used  = count ?? 0
-
-    if (!isPro && used >= FREE_TIER_LIMIT) {
-      return NextResponse.json(
-        { error: 'Quota exceeded', used, max: FREE_TIER_LIMIT },
-        { status: 402, headers: cors }
-      )
-    }
-
-    // ── 4. Archive + metadata in parallel ─────────────────────────────────
+    // ── 3. Archive + metadata in parallel ─────────────────────────────────
     const [archiveUrl, metadata] = await Promise.all([
       archiveWithWayback(url),
       extractMetadata(url)
@@ -99,9 +70,7 @@ export async function POST(req: NextRequest) {
       citationApa,
       citationMla,
       title:    metadata.title,
-      siteName: metadata.siteName,
-      used:     used + 1,
-      max:      isPro ? null : FREE_TIER_LIMIT
+      siteName: metadata.siteName
     }, { headers: cors })
 
   } catch (err) {
